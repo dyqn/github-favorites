@@ -1,0 +1,54 @@
+# 每天从本站的云端接口 /api/sync（EdgeOne KV）抓一份收藏列表到 public/defaults.json，
+# 作为纯静态兜底数据（边缘函数不可用、或站点被部署到不支持函数宿主时新访客依然能看到列表）。
+# 使用 GitHub 内置临时凭证，无需配置任何密钥。
+name: Sync defaults.json from /api/sync
+
+on:
+  schedule:
+    - cron: '30 1 * * *' # UTC 01:30 = 北京时间 09:30，每天一次
+  workflow_dispatch: {}   # 允许在 Actions 页面手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch /api/sync -> public/defaults.json
+        env:
+          SYNC_URL: https://github.shijuefuhao.com/api/sync
+        run: |
+          # --http1.1：该域名的 HTTP/2 连接对 curl 会 reset
+          curl -fsSL --http1.1 --retry 3 --retry-delay 10 "$SYNC_URL" -o /tmp/sync.json || {
+            echo "云端接口暂无数据（可能还没开启过同步），保留现有 defaults.json"
+            exit 0
+          }
+          node -e '
+            const fs = require("fs");
+            const data = JSON.parse(fs.readFileSync("/tmp/sync.json", "utf8"));
+            if (data && data.error && !Array.isArray(data.items)) throw new Error("api returned error: " + data.error);
+            const items = (Array.isArray(data) ? data : data.items)
+              .filter((i) => i && i.fullName && i.htmlUrl);
+            if (!items.length) throw new Error("sync data contains no valid items, aborting");
+            const out = Array.isArray(data)
+              ? items
+              : { version: 2, items, catOrder: data.catOrder || [], catOrderAt: data.catOrderAt || "" };
+            fs.mkdirSync("public", { recursive: true });
+            fs.writeFileSync("public/defaults.json", JSON.stringify(out, null, 2) + "\n");
+            console.log("wrote", items.length, "items");
+          '
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet -- public/defaults.json; then
+            git add public/defaults.json
+            git commit -m "同步 defaults.json"
+            git push
+          else
+            echo "no changes"
+          fi
