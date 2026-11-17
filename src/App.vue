@@ -247,7 +247,7 @@ async function addRepo() {
   if (!requireSync('收藏项目')) return
   const fullName = parseRepoInput(input.value)
   if (!fullName) {
-    toast('请输入正确的 GitHub 项目地址，如 https://github.com/qiaodamao/pixlite', true)
+    toast('请输入正确的 GitHub 项目地址，如 https://github.com/dyqn/pixlite', true)
     return
   }
   adding.value = true
@@ -308,6 +308,9 @@ onMounted(() => {
     dark.value = true
     document.documentElement.classList.add('dark')
   }
+  // 支持搜索引擎/站内搜索通过 ?q= 传入关键词（与结构化数据 SearchAction 对应）
+  const q = new URLSearchParams(window.location.search).get('q')
+  if (q) query.value = q.slice(0, 200)
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', measure)
   measure()
@@ -358,7 +361,7 @@ onBeforeUnmount(() => {
           v-model="input"
           class="add-input"
           type="text"
-          placeholder="https://github.com/qiaodamao/pixlite 或 qiaodamao/pixlite"
+          placeholder="https://github.com/dyqn/pixlite 或 dyqn/pixlite"
           @keyup.enter="addRepo"
         />
         <button class="btn primary" :disabled="adding" @click="addRepo">
@@ -416,15 +419,15 @@ onBeforeUnmount(() => {
 
   <footer class="footer">
     <nav class="foot-links">
-      <a href="https://github.com/qiaodamao/github-favorites" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/dyqn/github-favorites" target="_blank" rel="noopener">GitHub</a>
       <span class="sep">·</span>
       <a href="https://logo.kusheji.com" target="_blank" rel="noopener">矢量logo下载</a>
       <span class="sep">·</span>
-      <a href="https://mockup.kusheji.com" target="_blank" rel="noopener">壁纸样机生成器</a>
+      <a href="https://yj.dyqn.com" target="_blank" rel="noopener">壁纸样机生成器</a>
       <span class="sep">·</span>
-      <a href="https://qt.shijuefuhao.com" target="_blank" rel="noopener">轻图 Pixlite</a>
+      <a href="https://qt.dyqn.com" target="_blank" rel="noopener">轻图 Pixlite</a>
       <span class="sep">·</span>
-      <a href="https://pintu.kusheji.com" target="_blank" rel="noopener">酷拼图</a>
+      <a href="https://pintu.dyqn.com" target="_blank" rel="noopener">多元拼图</a>
     </nav>
     <div class="foot-note">数据来自 GitHub API · 收藏保存在你的浏览器本地，你可以设置同步密码后开启云端同步。</div>
     <div class="foot-stat">本网站已收录 {{ items.length }} 个开源项目</div>

@@ -2,13 +2,105 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据" />
+    <meta name="theme-color" content="#24292f" />
+
+    <!-- 基础 SEO -->
+    <title>GitHub 收藏 · 有趣的开源项目</title>
+    <meta name="description" content="收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据，按语言与分类快速发现值得关注的开源项目。" />
+    <meta name="keywords" content="GitHub,开源项目,项目收藏,开源发现,GitHub favorites,代码仓库,开发者工具,awesome" />
+    <meta name="author" content="GitHub 收藏" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://github.dyqn.com/" />
+
+    <!-- 图标 -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="GitHub 收藏" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Open Graph：Facebook / 微信 / QQ 等分享卡片 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GitHub 收藏" />
+    <meta property="og:url" content="https://github.dyqn.com/" />
+    <meta property="og:title" content="GitHub 收藏 · 有趣的开源项目" />
+    <meta property="og:description" content="收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据，按语言与分类快速发现值得关注的开源项目。" />
+    <meta property="og:image" content="https://github.dyqn.com/og-image.png" />
+    <meta property="og:image:secure_url" content="https://github.dyqn.com/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="GitHub 收藏 · 有趣的开源项目" />
+    <meta property="og:locale" content="zh_CN" />
+
+    <!-- Twitter / X 卡片 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GitHub 收藏 · 有趣的开源项目" />
+    <meta name="twitter:description" content="收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据，按语言与分类快速发现值得关注的开源项目。" />
+    <meta name="twitter:image" content="https://github.dyqn.com/og-image.png" />
+    <meta name="twitter:image:alt" content="GitHub 收藏 · 有趣的开源项目" />
+
+    <!-- itemprop：兼容微信等读取 microdata 的分享抓取 -->
+    <meta itemprop="name" content="GitHub 收藏 · 有趣的开源项目" />
+    <meta itemprop="description" content="收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据，按语言与分类快速发现值得关注的开源项目。" />
+    <meta itemprop="image" content="https://github.dyqn.com/og-image.png" />
+
+    <!-- 结构化数据：网站 / 组织 / 页面 / 站内搜索 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://github.dyqn.com/#website",
+          "url": "https://github.dyqn.com/",
+          "name": "GitHub 收藏",
+          "description": "收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据。",
+          "inLanguage": "zh-CN",
+          "publisher": { "@id": "https://github.dyqn.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://github.dyqn.com/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://github.dyqn.com/#organization",
+          "name": "GitHub 收藏",
+          "url": "https://github.dyqn.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://github.dyqn.com/favicon.svg"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://github.dyqn.com/#webpage",
+          "url": "https://github.dyqn.com/",
+          "name": "GitHub 收藏 · 有趣的开源项目",
+          "description": "收藏有趣的 GitHub 开源项目，自动解析项目介绍、Star 与 Fork 数据。",
+          "isPartOf": { "@id": "https://github.dyqn.com/#website" },
+          "about": { "@id": "https://github.dyqn.com/#organization" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://github.dyqn.com/og-image.png",
+            "width": 1200,
+            "height": 630
+          },
+          "inLanguage": "zh-CN"
+        }
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>GitHub 收藏 · 有趣的开源项目</title>
   </head>
   <body>
     <div id="app"></div>

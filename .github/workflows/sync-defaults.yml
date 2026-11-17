@@ -19,7 +19,7 @@ jobs:
 
       - name: Fetch /api/sync -> public/defaults.json
         env:
-          SYNC_URL: https://github.shijuefuhao.com/api/sync
+          SYNC_URL: https://github.dyqn.com/api/sync
         run: |
           # --http1.1：该域名的 HTTP/2 连接对 curl 会 reset
           curl -fsSL --http1.1 --retry 3 --retry-delay 10 "$SYNC_URL" -o /tmp/sync.json || {
